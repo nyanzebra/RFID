@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rfid: 
+  manufacturer: MyText
+  name: MyText
+  description: MyText
+  color: MyText
+  size: MyText
+
+two:
+  rfid: 
+  manufacturer: MyText
+  name: MyText
+  description: MyText
+  color: MyText
+  size: MyText

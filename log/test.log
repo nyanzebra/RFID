@@ -1,0 +1,11 @@
+  [1m[36m (44.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (43.9ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateItems (20150124223049)
+  [1m[35m (0.0ms)[0m  BEGIN
+  [1m[36m (90.1ms)[0m  [1mCREATE TABLE "items" ("item_id" serial primary key, "onsale" boolean, "location" text, "localenum" integer, "rfid_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (43.0ms)[0m  CREATE  INDEX  "index_items_on_rfid_id" ON "items"  ("rfid_id")
+  [1m[36m (5.0ms)[0m  [1mALTER TABLE "rfids" ADD CONSTRAINT "rfids_item_id_fk" FOREIGN KEY ("item_id") REFERENCES "items"(id)[0m
+PG::UndefinedTable: ERROR:  relation "rfids" does not exist
+: ALTER TABLE "rfids" ADD CONSTRAINT "rfids_item_id_fk" FOREIGN KEY ("item_id") REFERENCES "items"(id)
+  [1m[35m (0.0ms)[0m  ROLLBACK

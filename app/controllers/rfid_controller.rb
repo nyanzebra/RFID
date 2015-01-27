@@ -1,0 +1,3 @@
+class RfidController < ApplicationController
+	
+end
