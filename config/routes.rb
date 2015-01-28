@@ -5,9 +5,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :inventories do
-    resources :items
-  end
   
   resources :items do
       resources :rfid

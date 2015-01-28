@@ -1,0 +1,16 @@
+<div>
+	<% for rfid in @item.rfids %>
+		<br>
+		<strong>Color:</strong>
+		<%= rfid.color %>
+		<br>
+		<strong>Size:</strong>
+		<%= rfid.size %>
+		<br>
+		<strong>Location Specific:</strong>
+		<%= rfid.location_specific %>
+		<br>
+		<strong>Location:</strong>
+		<%= location_specific(rfid.location_general) %>
+	<% end %>
+</div>

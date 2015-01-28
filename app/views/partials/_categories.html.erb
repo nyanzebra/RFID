@@ -1,0 +1,5 @@
+<div>
+	<% for item in @categories %>
+		<%= button_to item.category, { :action=> "index", :category => item.category }, { :method => :get }  %>
+	<% end %>
+</div>

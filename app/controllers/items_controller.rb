@@ -4,32 +4,18 @@ class ItemsController < ApplicationController
 
 	#============================= Calls =============================
 	def edit
-		@item = Item.find(params[:item_id])
+		@item = Item.find(params[:id])
 	end
 	def show
-		@item = Item.find(params[:item_id])
+		@item = Item.find(params[:id])
 	end
 	def index
+		@categories = Item.find_by_sql("SELECT DISTINCT category FROM items ORDER BY category")
 		if params[:search]
 			@items = Item.search(params[:search])
-		elsif params[:rating]
-			@items = Item.search(params[:rating])
-		elsif params[:price]
-			@items = Item.search(params[:price])
-		elsif params[:color]
-			@items = Item.search(params[:color])
-		elsif params[:size]
-			@items = Item.search(params[:size])
-		elsif params[:manufacturer]
-			@items = Item.search(params[:manufacturer])
-		elsif params[:gender]
-			@items = Item.search(params[:gender])
-		elsif params[:category]	
-			@items = Item.search(params[:category])			
-		elsif params[:subcategory]			
-			@items = Item.search(params[:subcategory])
-		elsif params[:subsubcategory]
-			@items = Item.search(params[:subsubcategory])
+		elsif params[:category]
+			@items = Item.find_by_sql("SELECT * FROM items WHERE category = #{params[:category]}")
+			@subcategories = items.find_by_sql("SELECT DISTINCT subcategory FROM items ORDER BY subcategory")
 		else
 			@items = Item.all
 		end
@@ -43,7 +29,7 @@ class ItemsController < ApplicationController
 		end
 	end
 	def destroy
-		@item = Item.find(params[:id])
+		@item = Item.find(params[:di])
 		@item.destroy
 		redirect_to items_path
 	end

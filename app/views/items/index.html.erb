@@ -1,6 +1,9 @@
 <h1>Listing items</h1>
  
 <body> 
+  <div>
+    <%= render 'partials/categories' %>
+  </div>
   <div align="left">
     <% @items.in_groups_of(3, false).each do |row| %>
       <tr>
@@ -14,7 +17,7 @@
       <tr>
         <% for item in row %>
           <td> 
-              <%= item.rfid.name if item %>
+              <%= item.name if item %>
               <%= is_onsale(item.onsale) if item %>
           </td>
         <% end %>

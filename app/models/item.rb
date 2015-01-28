@@ -1,9 +1,7 @@
 class Item < ActiveRecord::Base
-	has_many :rfid
-	accepts_nested_attributes_for :rfid
-	validates :inventory, presence: true
+	has_many :rfids
 
-	def self.searchName(query)
+	def self.search(query)
 		find_by_sql("SELECT * FROM items WHERE items.name like '%#{query}%'")
 	end
 	def self.searchColor(color)

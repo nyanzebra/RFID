@@ -18,24 +18,26 @@ ActiveRecord::Schema.define(version: 20150125221503) do
 
   create_table "items", force: :cascade do |t|
     t.boolean  "onsale"
-    t.text     "location"
-    t.integer  "localenum"
-    t.integer  "rfid_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "items", ["rfid_id"], name: "index_items_on_rfid_id", using: :btree
-
-  create_table "rfids", force: :cascade do |t|
-    t.text     "manufacturer"
     t.text     "name"
     t.text     "description"
+    t.text     "manufacturer"
+    t.text     "category"
+    t.text     "subcategory"
+    t.text     "subsubcategory"
     t.integer  "gender"
+    t.integer  "price"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "rfids", force: :cascade do |t|
+    t.text     "location_specific"
+    t.integer  "location_general"
     t.text     "color"
     t.text     "size"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "item_id"
   end
 
 end

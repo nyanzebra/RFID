@@ -6,41 +6,42 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-rfid_list =
-[
-	["me", "Green Shirt", "shirt", 2, "green", "M"], # id 1
-	["me", "Black Pants", "pants", 1, "black", "M"], # id 2
-	["me", "Red Shirt", "shirt", 2, "red", "M"],     # id 3
-	["me", "Gree Pants", "pants", 0, "green", "M"],  # id 4
-	["me", "Cool Toy", "toy", 2, "blue", ""]         # id 5
-]
+# location_general
+# 0 = gone
+# 1 = storage
+# 2 = in store
+# 3 = display
+
+# gender
+# 0 = f
+# 1 = m
+# 2 = u
+# 3 >= don't care
 
 item_list = 
 [
-	[true, "Shirts Area", 1, 1], # id 1
-	[false, "Pants Area", 2, 2], # id 2
-	[false, "Shirts Area",2, 3], # id 3
-	[true, "Pants Area",3, 4],   # id 4
-	[false, "Toy Area", 2, 5]    # id 5
+	#id, onsale, name, description, manufacturer, category, subcategory, subsubcategory, gender, price
+	[1, true, "Green Shirt", "shirt", "me", "clothing", "shirt", "tee", 1, 24],
+	[2, false, "Blue Jeans", "pants", "me", "clothing", "pants", "jeans", 2, 30], 
+	[3, false, "Red Shirt", "shirt", "you", "clothing", "shirt", "blouse", 0, 36], 
+	[4, true, "TV", "something to do..", "you", "electronics", "tv", "" , 3, 100],  
+	[5, false, "stuffed bunny", "cool toy", "me", "toys", "indoor", "", 3, 10]   
 ]
 
-inventory_list =
+item_list.each do |id, onsale, name, description, manufacturer, category, subcategory, subsubcategory, gender, price|
+	Item.create(id: id, onsale: onsale, name: name, description: description, manufacturer: manufacturer, category: category, subcategory: subcategory, subsubcategory: subsubcategory, gender:gender, price: price)
+end
+
+rfid_list =
 [
-	[10, 1], # id 1
-	[1, 2],  # id 2
-	[5, 3],  # id 3
-	[7, 4],  # id 4
-	[8, 5]   # id 5
+	# id, item_id, location_specific, location_general, color, size
+	[1, 1, "shirts area", 2, "green", "M"], # id 1
+	[2, 2, "", 1, "blue", "M"], # id 2
+	[3, 3, "shirts area", 3, "red", "S"],     # id 3
+	[4, 4, "electronics area", 0, "black", "20"],  # id 4
+	[5, 5, "toy area", 2, "brown", ""]         # id 5
 ]
 
-rfid_list.each do |manufacturer, name, description, gender, color, size|	
-	Rfid.create(manufacturer: manufacturer, name: name, description: description, gender: gender, color: color, size: size)
-end
-
-item_list.each do |onsale, location, localenum, rfid_id|
-	Item.create(onsale: onsale, location: location, localenum: localenum, rfid_id: rfid_id)
-end
-
-inventory_list.each do |quantity, item_id|
-	Inventory.create(quantity: quantity, item_id: item_id)
+rfid_list.each do |id, item_id, location_specific, location_general, color, size|	
+	Rfid.create!(id: id, item_id: item_id, location_specific: location_specific, location_general: location_general, color: color, size: size)
 end
