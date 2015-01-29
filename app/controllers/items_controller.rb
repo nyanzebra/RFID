@@ -13,9 +13,7 @@ class ItemsController < ApplicationController
 		@categories = Item.find_by_sql("SELECT DISTINCT category FROM items ORDER BY category")
 		if params[:search]
 			@items = Item.search(params[:search])
-		elsif params[:category]
-			@items = Item.find_by_sql("SELECT * FROM items WHERE category = #{params[:category]}")
-			@subcategories = items.find_by_sql("SELECT DISTINCT subcategory FROM items ORDER BY subcategory")
+			@subcategories = Item.find_by_sql("SELECT DISTINCT subcategory FROM items WHERE category = '#{params[:search]}' ORDER BY subcategory")
 		else
 			@items = Item.all
 		end

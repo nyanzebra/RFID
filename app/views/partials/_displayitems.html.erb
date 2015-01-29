@@ -1,0 +1,21 @@
+<div align="left">
+    <% @items.in_groups_of(3, false).each do |row| %>
+      <tr>
+        <% for item in row %>
+          <td>
+            <%= link_to image_tag("placeholder.gif"), item_path(item) if item %>
+          </td>
+        <% end %>
+      </tr>
+      <br>
+      <tr>
+        <% for item in row %>
+          <td> 
+              <%= item.name if item %>
+              <%= is_onsale(item.onsale) if item %>
+          </td>
+        <% end %>
+      </tr>
+      <br>
+    <% end %>
+  </div>

@@ -1,5 +1,15 @@
 <div>
-	<% for item in @categories %>
-		<%= button_to item.category, { :action=> "index", :category => item.category }, { :method => :get }  %>
+	<% if @subcategories == nil %>
+		<% for item in @categories %>
+			<%= link_to item.category, items_path(:search => item.category)  %>
+		<% end %>
 	<% end %>
+	
+	<% if @subcategories != nil %>
+		<% for item in @subcategories %>
+			<%= link_to item.subcategory, items_path(:search => item.subcategory) if item %>
+		<% end %>
+	<% end %>
+
+	<%= link_to 'all categories', items_path %>
 </div>
